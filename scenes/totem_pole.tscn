@@ -3,15 +3,14 @@
 [ext_resource type="Script" path="res://scenes/totem_pole.gd" id="1_epydi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gw416"]
-radius = 157.0
-height = 334.0
+radius = 62.8
+height = 133.6
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ark4j"]
 resource_local_to_scene = true
 radius = 600.0
 
 [node name="TotemPole" type="Node2D"]
-scale = Vector2(0.4, 0.4)
 script = ExtResource("1_epydi")
 
 [node name="StackArea" type="Area2D" parent="."]

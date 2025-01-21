@@ -1,9 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2vy7iuevncak"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/bullet.gd" id="1_ifj4m"]
-[ext_resource type="Texture2D" uid="uid://dv32npmtyon8o" path="res://icon.svg" id="2_pkd4y"]
+[ext_resource type="Texture2D" uid="uid://bhmrw2fs1mvak" path="res://assets/totem.svg" id="2_hytm7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3781f"]
+radius = 30.0
 
 [node name="Bullet" type="Area2D"]
 scale = Vector2(0.468251, 0.468251)
@@ -12,8 +13,8 @@ collision_mask = 0
 script = ExtResource("1_ifj4m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.305107, 0.305107)
-texture = ExtResource("2_pkd4y")
+scale = Vector2(0.429, 0.429)
+texture = ExtResource("2_hytm7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.56197, 1.56426)

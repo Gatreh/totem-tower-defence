@@ -13,6 +13,12 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
+	var is_right_mouse_button : bool = (
+		event is InputEventMouseButton and 
+		event.button_index == MOUSE_BUTTON_RIGHT and 
+		event.is_pressed() 
+	)
+	
+	if is_right_mouse_button:
 		original_owner.texture_rect.visible = true
 		queue_free()

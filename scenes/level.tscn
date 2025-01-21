@@ -31,6 +31,15 @@ texture = ExtResource("1_6xki6")
 [node name="enemy" parent="TestMap1" instance=ExtResource("5_savff")]
 position = Vector2(70.7276, -261.034)
 
+[node name="enemy2" parent="TestMap1" instance=ExtResource("5_savff")]
+position = Vector2(70.7276, -330.085)
+
+[node name="enemy3" parent="TestMap1" instance=ExtResource("5_savff")]
+position = Vector2(70.7276, -407.506)
+
+[node name="enemy4" parent="TestMap1" instance=ExtResource("5_savff")]
+position = Vector2(70.7276, -493.296)
+
 [node name="PlacementArea" type="Area2D" parent="TestMap1" groups=["placement_area"]]
 position = Vector2(-506.716, -291.224)
 scale = Vector2(1.05676, 1.07463)
@@ -56,9 +65,10 @@ polygon = PackedVector2Array(20.2701, 205.695, 191.152, 207, 191.152, 83, 368, 8
 
 [node name="TotemPoles" type="Node2D" parent="TestMap1"]
 unique_name_in_owner = true
+z_index = 1
 y_sort_enabled = true
-position = Vector2(-509.453, -277.25)
-scale = Vector2(0.531788, 0.523114)
+position = Vector2(-958, -530)
+scale = Vector2(0.385, 0.385)
 
 [node name="Path2D" type="Path2D" parent="TestMap1"]
 curve = SubResource("Curve2D_ici8m")

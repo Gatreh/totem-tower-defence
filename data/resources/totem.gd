@@ -10,13 +10,14 @@ class_name Totem extends Resource
 @export var base_texture: Texture2D
 ## The colour to change the base_texture with.
 @export var modulation_color: Color = Color.WHITE
+
 @export_category("Tier 1 Stats")
 ## The base damage that is applied to the [TotemPole].
 @export var base_damage : int = 15
 ## The base attack speed that is applied to the [TotemPole]. Espressed in attacks per second.
 @export var base_attack_speed: float = 1.0
 ## The base range that is applied to the [TotemPole].
-@export var base_range : int = 600
+@export var base_range : int = 240
 ## The [member AttackType] that is applied to the [TotemPole].
 @export var attack_type : AttackType
 
@@ -27,6 +28,7 @@ class_name Totem extends Resource
 ## The ["global.gd".Element] that is applied to the [TotemPole].
 @export var element : Global.Element
 @export var gimmick : Global.Gimmick
+
 @export_category("Tier 3 Stats")
 
 ## This defines the different types of attacks that a [TotemPole] can use.

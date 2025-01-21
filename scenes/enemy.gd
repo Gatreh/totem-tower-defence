@@ -1,9 +1,9 @@
 class_name Enemy extends Area2D
 
-var max_health : int = 30
+var max_health : int = 15
 var health : int = max_health : set = set_health
 var element : Global.Element
-## Resistance denoted by type Global.Element, calculated as % meaning 100 is immunity to that type.
+## Resistance denoted by type Global.Element : value, calculated as % meaning 100 is immunity to that type.
 var element_resistance : = {
 	Global.Element.LIGHT : 1
 }
