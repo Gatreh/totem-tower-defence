@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://de8stvecwyiu5"]
+
+[ext_resource type="PackedScene" uid="uid://bdk24jj5rq45v" path="res://scenes/totem_button.tscn" id="1_4jlbm"]
+[ext_resource type="Resource" uid="uid://biil7oyypt6ch" path="res://data/resources/totem_bear.tres" id="2_yfrvm"]
+[ext_resource type="Resource" uid="uid://cxwdj8upxhw1" path="res://data/resources/totem_buffalo.tres" id="3_lx175"]
+[ext_resource type="Resource" uid="uid://dg2nk5b2cbf0h" path="res://data/resources/totem_eagle.tres" id="4_qlekd"]
+[ext_resource type="Resource" uid="uid://bcpvrftjs0q3r" path="res://data/resources/totem_salmon.tres" id="5_qw0qb"]
+[ext_resource type="Resource" uid="uid://db61auoc7cjjy" path="res://data/resources/totem_wolf.tres" id="6_jhxg5"]
+
+[node name="InGameUI" type="Control"]
+layout_mode = 3
+anchor_right = 0.211
+anchor_bottom = 1.0
+offset_right = 0.439987
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.629427, 0.525614, 0.241124, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TotemButton" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_4jlbm")]
+layout_mode = 2
+totem = ExtResource("2_yfrvm")
+
+[node name="TotemButton2" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_4jlbm")]
+layout_mode = 2
+totem = ExtResource("3_lx175")
+
+[node name="TotemButton3" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_4jlbm")]
+layout_mode = 2
+totem = ExtResource("4_qlekd")
+
+[node name="TotemButton4" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_4jlbm")]
+layout_mode = 2
+totem = ExtResource("5_qw0qb")
+
+[node name="TotemButton5" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_4jlbm")]
+layout_mode = 2
+totem = ExtResource("6_jhxg5")

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WolfTotem" load_steps=3 format=3 uid="uid://db61auoc7cjjy"]
+
+[ext_resource type="Texture2D" uid="uid://bhmrw2fs1mvak" path="res://assets/totem.svg" id="1_1blad"]
+
+[sub_resource type="GDScript" id="GDScript_wq6wc"]
+script/source = "class_name WolfTotem extends Totem
+"
+
+[resource]
+script = SubResource("GDScript_wq6wc")
+name = "Wolf"
+base_texture = ExtResource("1_1blad")
+modulation_color = Color(0.33189, 0.581585, 0.281654, 1)
+base_damage = 3
+base_attack_speed = 5.0
+base_range = 600
+attack_type = 1
+damage_multiplier = 1.05
+attack_speed_multiplier = 1.6
+range_multiplier = 1.2
+element = 5
+gimmick = 3

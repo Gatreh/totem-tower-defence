@@ -1,0 +1,33 @@
+class_name TotemButton
+extends Control
+
+@export var totem : Totem
+
+const TOTEM_DRAGGABLE = preload("res://scenes/totem_draggable.tscn")
+
+@onready var totem_name_label: Label = $TotemName
+@onready var texture_rect: TextureRect = $TextureRect
+
+func _ready() -> void:
+	totem_name_label.text = totem.name
+	texture_rect.modulate = totem.modulation_color
+	$TextureRect.texture = totem.base_texture
+	gui_input.connect(_gui_input)
+
+
+func _gui_input(event: InputEvent) -> void:
+	var is_mouse_pressed: bool = (
+		event is InputEventMouseButton and
+		event.button_index == MOUSE_BUTTON_LEFT and
+		event.is_pressed()
+	)
+	
+	if is_mouse_pressed:
+		if get_tree().get_nodes_in_group("mouse_draggable").size() == 0:
+			var mouse_draggable := TOTEM_DRAGGABLE.instantiate()
+			mouse_draggable.totem = totem.duplicate() as Totem 
+			mouse_draggable.original_owner = self
+			get_tree().get_first_node_in_group("ui_layer").add_child(mouse_draggable)
+			mouse_draggable.add_to_group("mouse_draggable")
+			
+			texture_rect.visible = false

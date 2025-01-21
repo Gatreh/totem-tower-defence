@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ol28fc6bfvm8"]
+
+[ext_resource type="PackedScene" uid="uid://b4nlgkamaw3d0" path="res://assets/3d/totem-buffalo.glb" id="1_i3mo2"]
+
+[node name="totem-buffalo" instance=ExtResource("1_i3mo2")]

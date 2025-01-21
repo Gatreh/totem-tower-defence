@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SalmonTotem" load_steps=3 format=3 uid="uid://bcpvrftjs0q3r"]
+
+[ext_resource type="Texture2D" uid="uid://bhmrw2fs1mvak" path="res://assets/totem.svg" id="1_8cavr"]
+
+[sub_resource type="GDScript" id="GDScript_sytnv"]
+script/source = "class_name SalmonTotem extends Totem
+"
+
+[resource]
+script = SubResource("GDScript_sytnv")
+name = "Salmon"
+base_texture = ExtResource("1_8cavr")
+modulation_color = Color(0, 0, 1, 1)
+base_damage = 7
+base_attack_speed = 1.0
+base_range = 600
+attack_type = 0
+damage_multiplier = 1.2
+attack_speed_multiplier = 1.2
+range_multiplier = 1.2
+element = 4
+gimmick = 4

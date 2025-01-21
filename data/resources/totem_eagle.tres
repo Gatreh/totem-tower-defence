@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EagleTotem" load_steps=3 format=3 uid="uid://dg2nk5b2cbf0h"]
+
+[ext_resource type="Texture2D" uid="uid://bhmrw2fs1mvak" path="res://assets/totem.svg" id="1_n62cu"]
+
+[sub_resource type="GDScript" id="GDScript_amcd7"]
+script/source = "class_name EagleTotem extends Totem
+"
+
+[resource]
+script = SubResource("GDScript_amcd7")
+name = "Eagle"
+base_texture = ExtResource("1_n62cu")
+modulation_color = Color(0.577008, 0.577008, 0.577008, 1)
+base_damage = 30
+base_attack_speed = 0.5
+base_range = 1200
+attack_type = 3
+damage_multiplier = 1.2
+attack_speed_multiplier = 1.1
+range_multiplier = 1.5
+element = 2
+gimmick = 5

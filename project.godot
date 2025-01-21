@@ -1,0 +1,68 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="totem-tower-defence"
+run/main_scene="res://assets/3d/world.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://assets/totem.svg"
+
+[autoload]
+
+Global="*res://globals/global.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "blue",
+"res://data/": "green",
+"res://globals/": "purple",
+"res://scenes/": "orange"
+}
+
+[global_group]
+
+mouse_draggable=""
+ui_layer=""
+
+[input]
+
+left_mouse={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+right_mouse={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(161, 13),"global_position":Vector2(170, 59),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_render/layer_1="Layer 1"
+2d_physics/layer_1="NONE"
+2d_physics/layer_2="ARMOURED"
+2d_physics/layer_3="FLYING"
+2d_physics/layer_4="SPEED"
+2d_physics/layer_5="STEALTH"
+2d_physics/layer_6="UNDERGROUND"
+2d_physics/layer_16="Placement"

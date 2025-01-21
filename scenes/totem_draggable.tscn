@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bll3du5lcyu3o"]
+
+[ext_resource type="Script" path="res://scenes/totem_draggable.gd" id="1_1utt2"]
+
+[node name="TotemDraggable" type="Sprite2D"]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_1utt2")
