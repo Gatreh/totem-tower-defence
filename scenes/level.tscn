@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://btu44hybbfikl"]
+[gd_scene load_steps=9 format=3 uid="uid://btu44hybbfikl"]
 
 [ext_resource type="Texture2D" uid="uid://blng11n7kw2rg" path="res://assets/test_map_1.png" id="1_6xki6"]
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_7sykj"]
@@ -9,6 +9,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xt4my"]
 size = Vector2(84, 52.4852)
+
+[sub_resource type="Curve2D" id="Curve2D_ici8m"]
 
 [node name="Level" type="Control"]
 y_sort_enabled = true
@@ -27,7 +29,7 @@ scale = Vector2(1.88045, 1.91163)
 texture = ExtResource("1_6xki6")
 
 [node name="enemy" parent="TestMap1" instance=ExtResource("5_savff")]
-position = Vector2(70.7276, -99.9147)
+position = Vector2(70.7276, -261.034)
 
 [node name="PlacementArea" type="Area2D" parent="TestMap1" groups=["placement_area"]]
 position = Vector2(-506.716, -291.224)
@@ -52,6 +54,18 @@ position = Vector2(-1.72342, -1.52588e-05)
 scale = Vector2(1, 0.998)
 polygon = PackedVector2Array(20.2701, 205.695, 191.152, 207, 191.152, 83, 368, 84, 369, 249, 242, 249, 243, 291, 434, 289, 434, 168, 569, 168, 571, 414, 333, 416, 335, 540, 740.383, 539.81, 738.874, 57.4157, 20.2701, 54.9769)
 
+[node name="TotemPoles" type="Node2D" parent="TestMap1"]
+unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(-509.453, -277.25)
+scale = Vector2(0.531788, 0.523114)
+
+[node name="Path2D" type="Path2D" parent="TestMap1"]
+curve = SubResource("Curve2D_ici8m")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="TestMap1/Path2D"]
+loop = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." groups=["ui_layer"]]
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("6_t23am")]
@@ -62,7 +76,3 @@ offset_left = -406.0
 offset_right = 5.0
 grow_horizontal = 0
 size_flags_horizontal = 8
-
-[node name="TotemPoles" type="Node2D" parent="."]
-unique_name_in_owner = true
-y_sort_enabled = true

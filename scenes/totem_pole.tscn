@@ -24,6 +24,10 @@ shape = SubResource("CapsuleShape2D_gw416")
 debug_color = Color(0.880126, 0, 0.260184, 0.42)
 
 [node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="Range" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_ark4j")
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true

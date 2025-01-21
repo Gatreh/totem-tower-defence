@@ -36,7 +36,7 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_index: int) 
 			var first_draggable : TotemDraggable = get_tree().get_first_node_in_group("mouse_draggable")
 			
 			var new_totem_pole := TOTEM_POLE.instantiate()
-			get_tree().root.get_node("Level/TotemPoles").add_child(new_totem_pole)
+			%TotemPoles.add_child(new_totem_pole)
 			new_totem_pole.global_position = event.global_position
 			new_totem_pole.add_totem_section(first_draggable.totem)
 			

@@ -3,10 +3,11 @@ class_name TotemPole extends Node2D
 @export var totem_stack : Array[Totem]
 
 var damage : int
-var attack_speed: float
+var attack_speed: float : set = set_attack_speed
 var range : int : set = set_attack_range
 var attack_type : Totem.AttackType
 var element : Global.Element
+var gimmicks : Array[Global.Gimmick] = [Global.Gimmick.NONE]
 var max_totem_size : int = 2
 
 var _sprite_displacement : int = -95
@@ -15,14 +16,20 @@ var _targets : Array
 @onready var stack_area: Area2D = $StackArea
 @onready var attack_area: Area2D = $AttackArea
 @onready var attack_range: CollisionShape2D = $AttackArea/Range
+@onready var attack_timer: Timer = $AttackTimer
 
 func _ready() -> void:
 	stack_area.input_event.connect(_on_input_event)
+	attack_area.area_entered.connect(_on_attack_range_entered)
+	attack_area.area_exited.connect(_on_attack_range_exited)
 
 
 func _physics_process(delta: float) -> void:
 	if _targets.is_empty():
 		return
+	if attack_timer.is_stopped():
+		shoot(_targets)
+		attack_timer.start()
 
 
 ## This function adds a totem section to the totem pole and updates the totem pole structure and stats.
@@ -40,6 +47,34 @@ func generate_totem_sprite(totem : Totem, index: int) -> void:
 	add_child(sprite)
 
 
+func shoot(targets : Array) -> void:
+	var bullet_amount: int = 1
+	var bullet_scene : Bullet
+	var bullets : Array[Bullet]
+	if attack_type == Totem.AttackType.SNIPE:
+		bullet_scene = preload("res://scenes/projectiles/snipe_bullet.tscn").instantiate()
+		bullet_scene.global_position = global_position
+		bullets.append(bullet_scene)
+	if attack_type == Totem.AttackType.STRIKE:
+		bullet_scene = preload("res://scenes/projectiles/strike_bullet.tscn").instantiate()
+		bullet_scene.global_position = targets.front().global_position + Vector2(0, -1080)
+		bullets.append(bullet_scene)
+	if attack_type == Totem.AttackType.FLURRY:
+		bullet_amount = 3
+		for n in bullet_amount:
+			bullet_scene = preload("res://scenes/projectiles/strike_bullet.tscn").instantiate()
+			bullet_scene.global_position = global_position + Vector2(randi_range(-20, 20), randi_range(-20, 20))
+			bullets.append(bullet_scene)
+	for bullet in bullets:
+		bullet.target = targets.front() as Enemy
+		bullet.damage = damage
+		bullet.element = element
+		for gimmick in gimmicks:
+			bullet.set_collision_mask_value(gimmick, true)
+		get_tree().root.get_node("Level").add_child(bullet)
+		await get_tree().create_timer((1 / attack_speed) / bullet_amount * 0.18).timeout
+
+
 func update_totem_pole():
 	for totem_index in totem_stack.size():
 		match totem_index:
@@ -54,7 +89,8 @@ func update_totem_pole():
 				range *= totem_stack[totem_index].range_multiplier
 				element = totem_stack[totem_index].element
 				#add collision shape based on gimmick.
-				attack_area.set_collision_layer_value(totem_stack[totem_index].gimmick, true)
+				attack_area.set_collision_mask_value(totem_stack[totem_index].gimmick, true)
+				gimmicks.append(totem_stack[totem_index].gimmick)
 			2: # totem_index 2 creates combination elements and adds a second gimmick
 				pass
 		# Create a Sprite2D, add the current totems texture and coloration to it and displace it. 
@@ -66,6 +102,20 @@ func update_totem_pole():
 func set_attack_range(new_range: int) -> void:
 	range = new_range
 	attack_range.shape.radius = range
+
+
+func set_attack_speed(new_attack_speed: float) -> void:
+	attack_speed = new_attack_speed
+	attack_timer.wait_time = 1 / attack_speed
+
+
+func _on_attack_range_entered(area: Area2D) -> void:
+	if area is Enemy:
+		_targets.append(area)
+
+
+func _on_attack_range_exited(area: Area2D) -> void:
+	_targets.remove_at(_targets.find(area))
 
 
 func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
