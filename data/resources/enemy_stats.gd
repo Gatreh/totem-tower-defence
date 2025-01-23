@@ -1,5 +1,6 @@
 class_name EnemyStats extends Resource
 
+@export var color : Color = Color.DEEP_PINK
 @export var max_health : int = 15
 @export var speed : float = 150.0
 @export var element_resistance : Array[ElementResistance]

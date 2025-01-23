@@ -1,14 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://7f6vqfl4ioyb"]
+[gd_scene load_steps=4 format=3 uid="uid://3ka7yqnv4n5k"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_ps100"]
-[ext_resource type="Resource" uid="uid://t6i7pqxrkefa" path="res://data/resources/enemy1_stats.tres" id="2_pmsfq"]
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_wn4cg"]
+[ext_resource type="Resource" uid="uid://dkb12xwirxov7" path="res://data/resources/enemy2_stats.tres" id="2_o2msp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hwba"]
 size = Vector2(32, 40)
 
 [node name="enemy" type="Area2D"]
-script = ExtResource("1_ps100")
-stats = ExtResource("2_pmsfq")
+script = ExtResource("1_wn4cg")
+stats = ExtResource("2_o2msp")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 anchors_preset = 5

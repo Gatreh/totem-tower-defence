@@ -1,6 +1,6 @@
 extends Bullet
 
-var range : float
+var attack_range : float
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -9,15 +9,14 @@ var range : float
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	$Sprite2D.modulate = modulation_color
-	print(range)
 
 
 func _physics_process(delta: float) -> void:
 	# Needs range calculation to swap between scale and pixels.
-	if collision_shape_2d.shape.radius >= range:
+	if collision_shape_2d.shape.radius >= attack_range:
 		queue_free()
 	# Expand to radius in one second
-	collision_shape_2d.shape.radius += range * delta
+	collision_shape_2d.shape.radius += attack_range * delta
 	sprite_2d.scale += Vector2(2,2) * delta
 
 

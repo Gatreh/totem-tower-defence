@@ -6,7 +6,7 @@ const projectile_path : String = "res://scenes/projectiles/"
 
 var damage : int
 var attack_speed: float : set = set_attack_speed
-var range : int : set = set_attack_range
+var attack_range : int : set = set_attack_range
 var attack_type : Totem.AttackType
 var element : Global.Element
 var gimmicks : Array[Global.Gimmick] = [Global.Gimmick.NONE]
@@ -21,18 +21,18 @@ var _targets : Array
 
 @onready var stack_area: Area2D = $StackArea
 @onready var attack_area: Area2D = $AttackArea
-@onready var attack_range: CollisionShape2D = $AttackArea/Range
+@onready var attack_range_area: CollisionShape2D = $AttackArea/Range
 @onready var attack_timer: Timer = $AttackTimer
 
 func _ready() -> void:
 	stack_area.mouse_entered.connect(_on_mouse_entered)
 	stack_area.mouse_exited.connect(_on_mouse_exited)
 	stack_area.input_event.connect(_on_input_event)
-	attack_area.area_entered.connect(_on_attack_range_entered)
-	attack_area.area_exited.connect(_on_attack_range_exited)
+	attack_area.area_entered.connect(_on_attack_range_area_entered)
+	attack_area.area_exited.connect(_on_attack_range_area_exited)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if _targets.is_empty():
 		return
 	if attack_timer.is_stopped():
@@ -75,7 +75,7 @@ func shoot(targets : Array) -> void:
 	
 	if attack_type == Totem.AttackType.QUAKE:
 		bullet_scene = preload(projectile_path + "quake_area.tscn").instantiate()
-		bullet_scene.range = range
+		bullet_scene.attack_range = attack_range
 		bullets.append(bullet_scene)
 	
 	if attack_type == Totem.AttackType.SNIPE:
@@ -110,13 +110,13 @@ func update_totem_pole():
 			0: # totem_index 0 adds the basic stats and attack type
 				damage = totem_stack[totem_index].base_damage
 				attack_speed = totem_stack[totem_index].base_attack_speed
-				range = totem_stack[totem_index].base_range
+				attack_range = totem_stack[totem_index].base_range
 				attack_type = totem_stack[totem_index].attack_type
 			
 			1: # totem_index 1 upgrades the stats and adds the element and gimmick to the tower
 				damage *= totem_stack[totem_index].damage_multiplier
 				attack_speed *= totem_stack[totem_index].attack_speed_multiplier
-				range *= totem_stack[totem_index].range_multiplier
+				attack_range *= totem_stack[totem_index].range_multiplier
 				element = totem_stack[totem_index].element
 				
 				# Add collision layer based on gimmick
@@ -125,15 +125,11 @@ func update_totem_pole():
 			
 			2: # totem_index 2 upgrades the stats again, creates combination elements and adds a second gimmick
 				pass
-		# Create a Sprite2D, add the current totems texture and coloration to it and displace it. 
-		# Then add it as a child.
-		# Displace the totem placement shape to be at the top of the newly added sprite
-		# If it's a stack of 3, remove the ability to place more totems
 
 
 func set_attack_range(new_range: int) -> void:
-	range = new_range
-	attack_range.shape.radius = range
+	attack_range = new_range
+	attack_range_area.shape.radius = attack_range
 
 
 func set_attack_speed(new_attack_speed: float) -> void:
@@ -141,12 +137,12 @@ func set_attack_speed(new_attack_speed: float) -> void:
 	attack_timer.wait_time = 1 / attack_speed
 
 
-func _on_attack_range_entered(area: Area2D) -> void:
+func _on_attack_range_area_entered(area: Area2D) -> void:
 	if area is Enemy:
 		_targets.append(area)
 
 
-func _on_attack_range_exited(area: Area2D) -> void:
+func _on_attack_range_area_exited(area: Area2D) -> void:
 	_targets.remove_at(_targets.find(area))
 
 

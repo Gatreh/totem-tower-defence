@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="20.066698mm"
+   height="17.03817mm"
+   viewBox="0 0 20.066698 17.03817"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   inkscape:export-filename="heart.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   sodipodi:docname="heart-container.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="10.149709"
+     inkscape:cx="29.80381"
+     inkscape:cy="29.902335"
+     inkscape:window-width="1920"
+     inkscape:window-height="962"
+     inkscape:window-x="1920"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2"><inkscape:page
+       x="0"
+       y="0"
+       width="20.066698"
+       height="17.03817"
+       id="page2"
+       margin="0"
+       bleed="0" /></sodipodi:namedview><defs
+     id="defs1" /><g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Real"
+     transform="translate(-66.628146,-114.0725)"><path
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.0930166"
+       d="m 76.652547,131.04544 c 0,0 3.522333,-3.52233 8.347339,-8.34734 4.825006,-4.825 -1.839477,-12.83668 -8.347339,-5.81962 -6.331507,-6.91476 -12.98851,1.29602 -8.523691,5.76084 4.9057,4.9057 8.523691,8.40612 8.523691,8.40612 z"
+       id="path2"
+       sodipodi:nodetypes="czccc" /><path
+       style="fill:#ba2424;fill-opacity:1;stroke:#ff0000;stroke-width:0.0790643"
+       d="m 76.65389,129.77736 c 0,0 3.875742,-4.05209 7.976996,-8.15335 4.101255,-4.10125 -2.915589,-10.14699 -7.976996,-3.24194 -4.852726,-6.75931 -11.628075,-0.48555 -7.832979,3.30955 4.169845,4.16984 7.832979,8.08574 7.832979,8.08574 z"
+       id="path3"
+       sodipodi:nodetypes="czccc" /></g></svg>

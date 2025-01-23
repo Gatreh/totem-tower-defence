@@ -2,7 +2,6 @@ class_name PlacementArea extends Area2D
 
 const TOTEM_POLE = preload("res://scenes/totem_pole.tscn")
 
-signal valid_position
 
 func _ready() -> void:
 	input_event.connect(_on_input_event)
@@ -13,9 +12,6 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_index: int) 
 		event is InputEventMouseButton and
 		event.button_index == MOUSE_BUTTON_LEFT and
 		event.is_released()
-	)
-	var event_is_mouse_motion: bool = (
-		event is InputEventMouseMotion
 	)
 	
 	var has_mouse_draggable := get_tree().get_nodes_in_group("mouse_draggable").size() > 0

@@ -15,16 +15,13 @@ var current_wave_index : int = 0
 var enemies_on_path : int = 0
 var wave_in_progress : bool = false
 
-@onready var wave_timer : Timer = $WaveTimer
-
 
 func _ready() -> void:
 	wave_finished.connect(_on_wave_finished)
-	await get_parent().ready
-	spawn_wave(waves[current_wave_index])
 
 
-func spawn_wave(wave : WaveData) -> void:
+func spawn_wave() -> void:
+	var wave : WaveData = waves[current_wave_index]
 	if not wave_in_progress:
 		wave_in_progress = true
 		wave_started.emit(current_wave_index)
@@ -62,6 +59,8 @@ func toggle_advancement_mode() -> void:
 	advancement_mode = AdvancementMode.AUTO\
 					if advancement_mode == AdvancementMode.MANUAL else\
 					AdvancementMode.MANUAL
+	if advancement_mode == AdvancementMode.AUTO:
+		spawn_wave()
 
 
 func _on_wave_finished(wave_index: int) -> void:
@@ -69,4 +68,4 @@ func _on_wave_finished(wave_index: int) -> void:
 	if current_wave_index >= waves.size():
 		all_waves_finished.emit()
 	elif advancement_mode == AdvancementMode.AUTO:
-		spawn_wave(waves[current_wave_index])
+		spawn_wave()

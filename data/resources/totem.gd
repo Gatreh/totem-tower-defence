@@ -27,7 +27,7 @@ class_name Totem extends Resource
 @export var range_multiplier : float = 1.2
 ## The ["global.gd".Element] that is applied to the [TotemPole].
 @export var element : Global.Element
-@export var gimmick : Global.Gimmick
+@export var gimmick : Global.Gimmick = Global.Gimmick.NONE
 
 @export_category("Tier 3 Stats")
 
