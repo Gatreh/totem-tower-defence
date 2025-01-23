@@ -21,6 +21,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.has_method("take_damage"):
+	if area.has_method("take_damage") and area == target:
 		queue_free()
 		area.take_damage(damage, element)

@@ -1,5 +1,7 @@
 class_name TotemPole extends Node2D
 
+const projectile_path : String = "res://scenes/projectiles/"
+
 @export var totem_stack : Array[Totem]
 
 var damage : int
@@ -10,6 +12,10 @@ var element : Global.Element
 var gimmicks : Array[Global.Gimmick] = [Global.Gimmick.NONE]
 var max_totem_size : int = 2
 
+var initial_outline_thickness : float = 3.0
+var hover_outline_thickness : float = initial_outline_thickness * 2
+
+
 var _sprite_displacement : int = -38
 var _targets : Array
 
@@ -19,6 +25,8 @@ var _targets : Array
 @onready var attack_timer: Timer = $AttackTimer
 
 func _ready() -> void:
+	stack_area.mouse_entered.connect(_on_mouse_entered)
+	stack_area.mouse_exited.connect(_on_mouse_exited)
 	stack_area.input_event.connect(_on_input_event)
 	attack_area.area_entered.connect(_on_attack_range_entered)
 	attack_area.area_exited.connect(_on_attack_range_exited)
@@ -45,7 +53,7 @@ func generate_totem_sprite(totem : Totem, index: int) -> void:
 	sprite.modulate = totem.modulation_color
 	sprite.position.y = _sprite_displacement * index
 	sprite.scale *= 0.4
-	add_child(sprite)
+	$CanvasGroup.add_child(sprite)
 
 
 func shoot(targets : Array) -> void:
@@ -54,24 +62,24 @@ func shoot(targets : Array) -> void:
 	var bullets : Array[Bullet]
 	
 	if attack_type == Totem.AttackType.CHAIN:
-		bullet_scene = preload("res://scenes/projectiles/chain_attack.tscn").instantiate()
+		bullet_scene = preload(projectile_path + "chain_attack.tscn").instantiate()
 		bullet_scene.jumps = 3
 		bullets.append(bullet_scene)
 	
 	if attack_type == Totem.AttackType.FLURRY:
 		bullet_amount = 3
 		for n in bullet_amount:
-			bullet_scene = preload("res://scenes/projectiles/snipe_bullet.tscn").instantiate()
+			bullet_scene = preload(projectile_path + "snipe_bullet.tscn").instantiate()
 			bullet_scene.global_position += Vector2(randi_range(-20, 20), randi_range(-20, 20))
 			bullets.append(bullet_scene)
 	
 	if attack_type == Totem.AttackType.QUAKE:
-		bullet_scene = preload("res://scenes/projectiles/quake_area.tscn").instantiate()
+		bullet_scene = preload(projectile_path + "quake_area.tscn").instantiate()
 		bullet_scene.range = range
 		bullets.append(bullet_scene)
 	
 	if attack_type == Totem.AttackType.SNIPE:
-		bullet_scene = preload("res://scenes/projectiles/snipe_bullet.tscn").instantiate()
+		bullet_scene = preload(projectile_path + "snipe_bullet.tscn").instantiate()
 		bullets.append(bullet_scene)
 	
 	if attack_type == Totem.AttackType.STRIKE:
@@ -148,6 +156,7 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
 			event.button_index == MOUSE_BUTTON_LEFT and
 			event.is_released()
 	)
+	
 	var has_mouse_draggable := get_tree().get_nodes_in_group("mouse_draggable").size() > 0
 	
 	if has_mouse_draggable and event_is_mouse_release and totem_stack.size() < max_totem_size:
@@ -158,3 +167,15 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
 		first_draggable.original_owner.texture_rect.visible = true
 		first_draggable.remove_from_group("mouse_draggable")
 		first_draggable.queue_free()
+
+func set_outline_thickness(new_thickness: float) -> void:
+	$CanvasGroup.material.set_shader_parameter("line_thickness", new_thickness)
+
+func _on_mouse_entered() -> void:
+	var tween = create_tween()
+	tween.tween_method(set_outline_thickness, initial_outline_thickness, hover_outline_thickness, 0.08)
+
+
+func _on_mouse_exited() -> void:
+	var tween = create_tween()
+	tween.tween_method(set_outline_thickness, hover_outline_thickness, initial_outline_thickness, 0.08)

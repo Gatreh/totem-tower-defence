@@ -7,7 +7,7 @@ class_name Totem extends Resource
 ## The name of the Totem
 @export var name : String
 ## The Base texture of the totem
-@export var base_texture: Texture2D
+@export var base_texture: Texture2D = preload("res://assets/totem.svg")
 ## The colour to change the base_texture with.
 @export var modulation_color: Color = Color.WHITE
 

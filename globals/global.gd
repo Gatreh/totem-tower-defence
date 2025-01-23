@@ -19,3 +19,19 @@ enum Gimmick {
 	STEALTH = 5,
 	UNDERGROUND = 6,
 }
+
+var player_health : int = 100 : set = set_player_health
+var shells : int = 1000 : set = set_shells_amount
+
+
+func set_player_health(new_health : int) -> void:
+	player_health = new_health if new_health > -1 else 0
+	print("health left: " + str(player_health))
+	if player_health == 0:
+		print("Died")
+		get_tree().quit()
+
+
+func set_shells_amount(new_amount: int) -> void:
+	shells = new_amount
+	print("Shells: " + str(shells))

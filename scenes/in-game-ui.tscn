@@ -9,11 +9,15 @@
 
 [node name="InGameUI" type="Control"]
 layout_mode = 3
-anchor_right = 0.211
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.439987
-grow_horizontal = 2
+offset_left = -406.0
+offset_right = 5.0
+grow_horizontal = 0
 grow_vertical = 2
+size_flags_horizontal = 8
 mouse_filter = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]

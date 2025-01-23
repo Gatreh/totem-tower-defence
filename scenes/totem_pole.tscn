@@ -1,6 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfxkxcrftcd8d"]
+[gd_scene load_steps=6 format=3 uid="uid://bfxkxcrftcd8d"]
 
 [ext_resource type="Script" path="res://scenes/totem_pole.gd" id="1_epydi"]
+[ext_resource type="Shader" path="res://assets/group_outline.gdshader" id="1_tci8f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m58vh"]
+resource_local_to_scene = true
+shader = ExtResource("1_tci8f")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 4.0
+shader_parameter/viewport_scale = Vector2(1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gw416"]
 radius = 62.8
@@ -12,6 +20,9 @@ radius = 600.0
 
 [node name="TotemPole" type="Node2D"]
 script = ExtResource("1_epydi")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_m58vh")
 
 [node name="StackArea" type="Area2D" parent="."]
 collision_layer = 32768

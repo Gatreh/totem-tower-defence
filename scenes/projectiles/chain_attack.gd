@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Make sure there actually exists a target. Otherwise free the bullet.
-	if targets == null or targets.is_empty() or target == null or not is_instance_valid(target):
+	if check_target():
 		queue_free()
 		return
 	
@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 			has_dealt_damage = true
 			targets.erase(target)
 			
-			if not targets.is_empty():
+			if check_target():
 				target = targets.front()
 				has_dealt_damage = false
 			else:
@@ -43,6 +43,10 @@ func calculate_damage() -> int:
 	# first time it jumps it does 100% damage, the last time it jumps it does 50% damage
 	# It always does 50% damage, then depending on how many jumps are left it adds up to 50% more damage
 	return (damage * 0.5) + (damage * 0.5 * (float(jumps) / initial_jumps if jumps > 1 else 0))
+
+
+func check_target() -> bool:
+	return targets == null or targets.is_empty() or target == null or not is_instance_valid(target)
 
 
 func _on_area_entered(area: Area2D) -> void:
