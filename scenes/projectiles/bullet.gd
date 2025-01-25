@@ -4,7 +4,7 @@ var damage : int
 var target : Enemy
 var element : Global.Element
 var modulation_color : Color
-var travel_speed : float = 2000.0
+var travel_speed : float = 3000.0
 
 
 func _ready() -> void:

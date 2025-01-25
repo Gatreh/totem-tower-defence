@@ -21,15 +21,15 @@ func _ready() -> void:
 
 
 func spawn_wave() -> void:
-	var wave : WaveData = waves[current_wave_index]
 	if not wave_in_progress:
 		wave_in_progress = true
 		wave_started.emit(current_wave_index)
+		
+		var wave : WaveData = waves[current_wave_index]
 		for enemies in wave.enemy_spawns:
 			for n in enemies.spawn_count:
 				spawn_enemy(enemies.enemy_scene)
 				await get_tree().create_timer(enemies.spawn_time).timeout
-		wave_in_progress = false
 
 
 func spawn_enemy(enemy_scene: PackedScene) -> void:
@@ -59,11 +59,12 @@ func toggle_advancement_mode() -> void:
 	advancement_mode = AdvancementMode.AUTO\
 					if advancement_mode == AdvancementMode.MANUAL else\
 					AdvancementMode.MANUAL
-	if advancement_mode == AdvancementMode.AUTO:
+	if advancement_mode == AdvancementMode.AUTO and not wave_in_progress:
 		spawn_wave()
 
 
 func _on_wave_finished(wave_index: int) -> void:
+	wave_in_progress = false
 	current_wave_index = wave_index + 1
 	if current_wave_index >= waves.size():
 		all_waves_finished.emit()

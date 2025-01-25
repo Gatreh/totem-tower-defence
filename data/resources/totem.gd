@@ -12,6 +12,7 @@ class_name Totem extends Resource
 @export var modulation_color: Color = Color.WHITE
 
 @export_category("Tier 1 Stats")
+@export var base_cost : int = 200
 ## The base damage that is applied to the [TotemPole].
 @export var base_damage : int = 15
 ## The base attack speed that is applied to the [TotemPole]. Espressed in attacks per second.
@@ -22,6 +23,7 @@ class_name Totem extends Resource
 @export var attack_type : AttackType
 
 @export_category("Tier 2 Stats")
+@export var cost_multiplier : float = 2.5
 @export var damage_multiplier : float = 1.2
 @export var attack_speed_multiplier : float = 1.2
 @export var range_multiplier : float = 1.2

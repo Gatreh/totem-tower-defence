@@ -4,10 +4,11 @@ const projectile_path : String = "res://scenes/projectiles/"
 
 @export var totem_stack : Array[Totem]
 
-var damage : int
 var attack_speed: float : set = set_attack_speed
 var attack_range : int : set = set_attack_range
 var attack_type : Totem.AttackType
+var cost : int
+var damage : int
 var element : Global.Element
 var gimmicks : Array[Global.Gimmick] = [Global.Gimmick.NONE]
 var max_totem_size : int = 2
@@ -140,10 +141,15 @@ func set_attack_speed(new_attack_speed: float) -> void:
 func _on_attack_range_area_entered(area: Area2D) -> void:
 	if area is Enemy:
 		_targets.append(area)
+		_sort_targets()
+
+
+func _sort_targets() -> void:
+	_targets.sort_custom(func(a, b): return a.path_follow_2d.progress > b.path_follow_2d.progress)
 
 
 func _on_attack_range_area_exited(area: Area2D) -> void:
-	_targets.remove_at(_targets.find(area))
+	_targets.erase(area)
 
 
 func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
@@ -157,6 +163,13 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
 	
 	if has_mouse_draggable and event_is_mouse_release and totem_stack.size() < max_totem_size:
 		var first_draggable : TotemDraggable = get_tree().get_first_node_in_group("mouse_draggable")
+		match totem_stack.size():
+			1:
+				if Global.shells < cost * first_draggable.totem.cost_multiplier:
+					return
+				else:
+					cost *= first_draggable.totem.cost_multiplier
+					Global.shells -= cost
 		add_totem_section(first_draggable.totem)
 		
 		# Clean up draggable component

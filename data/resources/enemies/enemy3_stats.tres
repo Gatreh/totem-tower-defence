@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=4 format=3 uid="uid://ruv4jv7e4wp6"]
+
+[ext_resource type="Script" path="res://data/resources/element_resistance.gd" id="1_abnyn"]
+[ext_resource type="Script" path="res://data/resources/enemies/enemy_stats.gd" id="2_jvjyk"]
+
+[sub_resource type="Resource" id="Resource_y4gro"]
+script = ExtResource("1_abnyn")
+element = 0
+resistance = 0.05
+
+[resource]
+script = ExtResource("2_jvjyk")
+color = Color(9.14484e-06, 0.770538, 0.654339, 1)
+max_health = 45
+speed = 150.0
+element_resistance = Array[ExtResource("1_abnyn")]([SubResource("Resource_y4gro")])
+gimmicks = Array[int]([])

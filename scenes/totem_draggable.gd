@@ -6,6 +6,7 @@ var original_owner : TotemButton
 func _ready() -> void:
 	texture = totem.base_texture
 	modulate = totem.modulation_color
+	print(totem.base_cost)
 
 
 func _process(_delta: float) -> void:

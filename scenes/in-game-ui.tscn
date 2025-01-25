@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://de8stvecwyiu5"]
 
 [ext_resource type="Theme" uid="uid://cifa5fam0gar0" path="res://assets/in-game-ui_theme.tres" id="1_0unqf"]
-[ext_resource type="Texture2D" uid="uid://cpurlkwtn2iny" path="res://assets/heart-container.svg" id="1_1b771"]
 [ext_resource type="PackedScene" uid="uid://bdk24jj5rq45v" path="res://scenes/totem_button.tscn" id="1_4jlbm"]
 [ext_resource type="Script" path="res://scenes/in_game_ui.gd" id="1_s0ocp"]
+[ext_resource type="Texture2D" uid="uid://dbju6ieacd3cs" path="res://assets/heart_container.svg" id="2_577oj"]
 [ext_resource type="Resource" uid="uid://biil7oyypt6ch" path="res://data/resources/totem_bear.tres" id="2_yfrvm"]
 [ext_resource type="Resource" uid="uid://cxwdj8upxhw1" path="res://data/resources/totem_buffalo.tres" id="3_lx175"]
 [ext_resource type="Texture2D" uid="uid://u40ftap0rugn" path="res://assets/shell.svg" id="3_v4t21"]
@@ -40,7 +40,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="TopUi"]
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("1_1b771")
+texture = ExtResource("2_577oj")
 stretch_mode = 4
 
 [node name="TextureRect3" type="TextureRect" parent="TopUi/TextureRect"]

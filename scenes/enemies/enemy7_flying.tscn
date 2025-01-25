@@ -1,23 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://3ka7yqnv4n5k"]
+[gd_scene load_steps=4 format=3 uid="uid://qp21b532vox5"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_wn4cg"]
-[ext_resource type="Resource" uid="uid://dkb12xwirxov7" path="res://data/resources/enemies/enemy2_stats.tres" id="2_o2msp"]
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_wlnkb"]
+[ext_resource type="Resource" uid="uid://daky7ockksg8m" path="res://data/resources/enemies/enemy7_stats.tres" id="2_2l0d0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hwba"]
-size = Vector2(32, 40)
+size = Vector2(32, 21.5)
 
 [node name="enemy" type="Area2D"]
-script = ExtResource("1_wn4cg")
-stats = ExtResource("2_o2msp")
+script = ExtResource("1_wlnkb")
+stats = ExtResource("2_2l0d0")
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -21.0
-offset_top = 4.0
-offset_right = 21.0
-offset_bottom = 26.0
+offset_left = -11.0
+offset_top = 7.0
+offset_right = 11.0
+offset_bottom = 20.0
 grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.25098, 0.25098, 0.25098, 0.729412)
@@ -29,12 +29,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -16.0
-offset_top = -20.0
+offset_top = -25.0
 offset_right = 16.0
-offset_bottom = 20.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14.75)
 shape = SubResource("RectangleShape2D_6hwba")

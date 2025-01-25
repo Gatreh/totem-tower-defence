@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=3 format=3 uid="uid://t6i7pqxrkefa"]
+
+[ext_resource type="Script" path="res://data/resources/element_resistance.gd" id="1_eq8al"]
+[ext_resource type="Script" path="res://data/resources/enemies/enemy_stats.gd" id="2_mitix"]
+
+[resource]
+script = ExtResource("2_mitix")
+color = Color(1, 0.0784314, 0.576471, 1)
+max_health = 15
+speed = 150.0
+element_resistance = Array[ExtResource("1_eq8al")]([])
+gimmicks = Array[int]([])

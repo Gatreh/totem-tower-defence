@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WaveData" load_steps=7 format=3 uid="uid://du7lkm8a04sp7"]
+
+[ext_resource type="Script" path="res://globals/enemy_spawn_data.gd" id="1_qilcw"]
+[ext_resource type="PackedScene" uid="uid://bvtqehk7ringw" path="res://scenes/enemies/enemy6_stealth.tscn" id="2_1bm8y"]
+[ext_resource type="PackedScene" uid="uid://ciojx4hw5gmh1" path="res://scenes/enemies/enemy5.tscn" id="3_04cvr"]
+[ext_resource type="Script" path="res://data/resources/waves/wave_data.gd" id="3_reanp"]
+
+[sub_resource type="Resource" id="Resource_o1581"]
+script = ExtResource("1_qilcw")
+enemy_scene = ExtResource("2_1bm8y")
+spawn_count = 5
+spawn_time = 0.5
+
+[sub_resource type="Resource" id="Resource_nf615"]
+script = ExtResource("1_qilcw")
+enemy_scene = ExtResource("3_04cvr")
+spawn_count = 15
+spawn_time = 0.3
+
+[resource]
+script = ExtResource("3_reanp")
+enemy_spawns = Array[ExtResource("1_qilcw")]([SubResource("Resource_o1581"), SubResource("Resource_nf615"), SubResource("Resource_o1581"), SubResource("Resource_nf615"), SubResource("Resource_o1581")])

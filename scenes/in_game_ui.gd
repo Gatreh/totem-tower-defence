@@ -37,4 +37,5 @@ func update_shells_label(new_shell_amount : int) -> void:
 
 
 func update_wave_label(wave_index : int) -> void:
-	waves_label.text = "Wave " + str(wave_index + 1) + "/" + str(total_waves)
+	waves_label.text = "Wave " + str(wave_index + 1 if wave_index < total_waves else total_waves)\
+					 + "/" + str(total_waves)

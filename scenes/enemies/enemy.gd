@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		path_follow_2d.progress += stats.speed * delta
 	if path_follow_2d.progress_ratio > 0.98:
 		queue_free()
-		Global.player_health -= 1
+		Global.player_health -= stats.max_health / 15
 
 
 func take_damage(damage: int, element: Global.Element) -> void:
@@ -43,4 +43,4 @@ func set_health(new_health: int) -> void:
 	health = clampi(new_health, 0, stats.max_health)
 	if health == 0:
 		queue_free()
-		Global.shells += stats.max_health
+		Global.shells += stats.max_health * 0.75
