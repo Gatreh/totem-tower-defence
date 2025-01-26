@@ -24,6 +24,7 @@ var _targets : Array
 @onready var attack_area: Area2D = $AttackArea
 @onready var attack_range_area: CollisionShape2D = $AttackArea/Range
 @onready var attack_timer: Timer = $AttackTimer
+@onready var stack_area_shape: CollisionShape2D = %StackAreaShape
 
 func _ready() -> void:
 	stack_area.mouse_entered.connect(_on_mouse_entered)
@@ -46,6 +47,7 @@ func add_totem_section(section: Totem):
 	totem_stack.append(section)
 	update_totem_pole()
 	generate_totem_sprite(section, totem_stack.size() - 1)
+	update_atack_area_collision()
 
 
 func generate_totem_sprite(totem : Totem, index: int) -> void:
@@ -55,6 +57,12 @@ func generate_totem_sprite(totem : Totem, index: int) -> void:
 	sprite.position.y = _sprite_displacement * index
 	sprite.scale *= 0.4
 	$CanvasGroup.add_child(sprite)
+
+
+func update_atack_area_collision():
+	stack_area_shape.position.y += _sprite_displacement / 2 
+	stack_area_shape.shape.height -= _sprite_displacement
+	stack_area_shape.shape.radius = 40
 
 
 func shoot(targets : Array) -> void:
@@ -128,6 +136,8 @@ func update_totem_pole():
 				# Add collision layer based on gimmick
 				attack_area.set_collision_mask_value(totem_stack[totem_index].gimmick, true)
 				gimmicks.append(totem_stack[totem_index].gimmick)
+				
+				# 
 			
 			2: # totem_index 2 upgrades the stats again, creates combination elements and adds a second gimmick
 				pass

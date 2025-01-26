@@ -2,7 +2,6 @@ class_name PlacementArea extends Area2D
 
 const TOTEM_POLE = preload("res://scenes/totem_pole.tscn")
 
-
 func _ready() -> void:
 	input_event.connect(_on_input_event)
 

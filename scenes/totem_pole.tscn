@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfxkxcrftcd8d"]
+[gd_scene load_steps=7 format=3 uid="uid://bfxkxcrftcd8d"]
 
 [ext_resource type="Script" path="res://scenes/totem_pole.gd" id="1_epydi"]
 [ext_resource type="Shader" path="res://assets/group_outline.gdshader" id="1_tci8f"]
@@ -11,8 +11,13 @@ shader_parameter/line_thickness = 4.0
 shader_parameter/viewport_scale = Vector2(1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gw416"]
-radius = 62.8
-height = 133.6
+radius = 80.0
+height = 160.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dljj2"]
+resource_local_to_scene = true
+radius = 25.0
+height = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ark4j"]
 resource_local_to_scene = true
@@ -24,14 +29,22 @@ script = ExtResource("1_epydi")
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_m58vh")
 
+[node name="DisableStackingArea" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 0
+
+[node name="DisablePlacementShape" type="CollisionShape2D" parent="DisableStackingArea"]
+shape = SubResource("CapsuleShape2D_gw416")
+debug_color = Color(0.880126, 0, 0.260184, 0.42)
+
 [node name="StackArea" type="Area2D" parent="."]
 collision_layer = 32768
 collision_mask = 0
 
-[node name="PlacementShape" type="CollisionShape2D" parent="StackArea"]
+[node name="StackAreaShape" type="CollisionShape2D" parent="StackArea"]
 unique_name_in_owner = true
-shape = SubResource("CapsuleShape2D_gw416")
-debug_color = Color(0.880126, 0, 0.260184, 0.42)
+position = Vector2(0, 19)
+shape = SubResource("CapsuleShape2D_dljj2")
 
 [node name="AttackArea" type="Area2D" parent="."]
 collision_layer = 0
