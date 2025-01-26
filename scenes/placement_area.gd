@@ -1,7 +1,6 @@
 class_name PlacementArea extends Area2D
 
 const TOTEM_POLE = preload("res://scenes/totem_pole.tscn")
-@onready var in_game_ui: Control = %InGameUI
 
 
 func _ready() -> void:

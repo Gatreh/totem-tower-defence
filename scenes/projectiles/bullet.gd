@@ -6,7 +6,7 @@ var element : Global.Element
 var modulation_color : Color
 var travel_speed : float = 3000.0
 var velocity : Vector2 = Vector2.ZERO
-var steering_factor := 15
+var steering_factor : float = 15.0
 
 
 func _ready() -> void:

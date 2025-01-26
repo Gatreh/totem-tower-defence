@@ -62,7 +62,7 @@ func generate_totem_sprite(totem : Totem, index: int) -> void:
 
 
 func update_atack_area_collision():
-	stack_area_shape.position.y += _sprite_displacement / 2 
+	stack_area_shape.position.y += floor(float(_sprite_displacement) / 2) 
 	stack_area_shape.shape.height -= _sprite_displacement
 	stack_area_shape.shape.radius = 40
 
@@ -79,7 +79,6 @@ func shoot(targets : Array) -> void:
 	
 	if attack_type == Totem.AttackType.FLURRY:
 		bullet_amount = 3
-		var target_direction : Vector2 = global_position.direction_to(targets.front().global_position)
 		for n in bullet_amount:
 			bullet_scene = preload(projectile_path + "flurry_bullet.tscn").instantiate()
 			bullet_scene.velocity = Vector2(randi_range(-500, 500), randi_range(-500, 500))
@@ -129,11 +128,11 @@ func update_totem_pole():
 				attack_type = totem_stack[totem_index].attack_type
 			
 			1: # totem_index 1 upgrades the stats and adds the element and gimmick to the tower
-				cost *= totem_stack[totem_index].cost_multiplier
-				damage *= totem_stack[totem_index].damage_multiplier
-				attack_speed *= totem_stack[totem_index].attack_speed_multiplier
-				attack_range *= totem_stack[totem_index].range_multiplier
-				element = totem_stack[totem_index].element
+				cost = floor(float(cost) * totem_stack[totem_index].cost_multiplier)
+				damage = floor(float(damage) * totem_stack[totem_index].damage_multiplier)
+				attack_speed = floor(float(attack_speed) * totem_stack[totem_index].attack_speed_multiplier)
+				attack_range = floor(float(attack_range) * totem_stack[totem_index].range_multiplier)
+				element = totem_stack[totem_index].element as Global.Element
 				
 				# Add collision layer based on gimmick
 				attack_area.set_collision_mask_value(totem_stack[totem_index].gimmick, true)
@@ -178,13 +177,13 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
 	
 	if event_is_mouse_release and has_mouse_draggable and totem_stack.size() < max_totem_size:
 		var first_draggable : TotemDraggable = get_tree().get_first_node_in_group("mouse_draggable")
-		var totem_cost = cost * first_draggable.totem.cost_multiplier if totem_stack.size() == 1 else 0
+		var totem_cost = cost * first_draggable.totem.cost_multiplier if totem_stack.size() == 1 else 0.0
 		
 		if Global.shells < totem_cost:
 			# Show insufficient shells message
 			return
 		else:
-			cost *= first_draggable.totem.cost_multiplier
+			cost = floor(float(cost) * first_draggable.totem.cost_multiplier)
 			Global.shells -= cost
 		add_totem_section(first_draggable.totem)
 		

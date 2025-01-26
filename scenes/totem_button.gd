@@ -13,18 +13,16 @@ func _ready() -> void:
 	totem_name_label.text = totem.name
 	texture_rect.modulate = totem.modulation_color
 	$TextureRect.texture = totem.base_texture
-	gui_input.connect(_gui_input)
 
 
 func _create_mouse_draggable():
-	if not get_tree().get_nodes_in_group("mouse_draggable").size() > 0:
-		var mouse_draggable := TOTEM_DRAGGABLE.instantiate()
-		mouse_draggable.totem = totem.duplicate() as Totem 
-		mouse_draggable.original_owner = self
-		get_tree().get_first_node_in_group("ui_layer").add_child(mouse_draggable)
-		mouse_draggable.add_to_group("mouse_draggable")
-		
-		texture_rect.visible = false
+	var mouse_draggable := TOTEM_DRAGGABLE.instantiate()
+	mouse_draggable.totem = totem.duplicate() as Totem 
+	mouse_draggable.original_owner = self
+	get_tree().get_first_node_in_group("ui_layer").add_child(mouse_draggable)
+	mouse_draggable.add_to_group("mouse_draggable")
+	
+	texture_rect.visible = false
 
 func _gui_input(event: InputEvent) -> void:
 	var is_left_mouse_pressed: bool = (

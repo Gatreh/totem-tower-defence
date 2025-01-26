@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 func calculate_damage() -> int:
 	# first time it jumps it does 100% damage, the last time it jumps it does 50% damage
 	# It always does 50% damage, then depending on how many jumps are left it adds up to 50% more damage
-	return (damage * 0.5) + (damage * 0.5 * (float(jumps) / initial_jumps if jumps > 1 else 0))
+	return floor((damage * 0.5) + (damage * 0.5 * (float(jumps) / initial_jumps if jumps > 1 else 0.0)))
 
 
 func _on_area_entered(area: Area2D) -> void:
