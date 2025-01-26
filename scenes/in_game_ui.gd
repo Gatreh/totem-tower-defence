@@ -21,7 +21,9 @@ func _ready() -> void:
 	shells_label.text = str(Global.shells)
 	
 	next_wave_button.pressed.connect(wave_manager.spawn_wave)
+	next_wave_button.gui_input.connect(_on_gui_input)
 	auto_wave_button.pressed.connect(wave_manager.toggle_advancement_mode)
+	auto_wave_button.gui_input.connect(_on_gui_input)
 	
 	Global.health_changed.connect(update_health_label)
 	Global.shells_changed.connect(update_shells_label)
@@ -39,3 +41,13 @@ func update_shells_label(new_shell_amount : int) -> void:
 func update_wave_label(wave_index : int) -> void:
 	waves_label.text = "Wave " + str(wave_index + 1 if wave_index < total_waves else total_waves)\
 					 + "/" + str(total_waves)
+
+func _on_gui_input(event: InputEvent):
+	var is_right_mouse_button : bool = (
+		event is InputEventMouseButton and 
+		event.button_index == MOUSE_BUTTON_RIGHT and 
+		event.is_pressed() 
+	)
+	var has_mouse_draggable : bool = get_tree().get_nodes_in_group("mouse_draggable").size() > 0
+	if is_right_mouse_button and has_mouse_draggable:
+		get_tree().get_first_node_in_group("mouse_draggable").delete()

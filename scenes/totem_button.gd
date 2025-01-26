@@ -31,6 +31,11 @@ func _gui_input(event: InputEvent) -> void:
 		event.button_index == MOUSE_BUTTON_LEFT and
 		event.is_pressed()
 	)
+	var is_right_mouse_pressed: bool = (
+		event is InputEventMouseButton and
+		event.button_index == MOUSE_BUTTON_RIGHT and
+		event.is_pressed()
+	)
 	var has_mouse_draggable := get_tree().get_nodes_in_group("mouse_draggable").size() > 0
 	
 	if is_left_mouse_pressed and not has_mouse_draggable:
@@ -42,3 +47,6 @@ func _gui_input(event: InputEvent) -> void:
 			first_draggable.delete()
 			await first_draggable.tree_exited
 			_create_mouse_draggable()
+	
+	elif is_right_mouse_pressed and has_mouse_draggable:
+		get_tree().get_first_node_in_group("mouse_draggable").delete()
