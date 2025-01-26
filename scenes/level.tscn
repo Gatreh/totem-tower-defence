@@ -44,8 +44,7 @@ point_count = 14
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
 
-[node name="WaveManager" parent="." node_paths=PackedStringArray("path") instance=ExtResource("2_yitaq")]
-path = NodePath("../TestMap1/Path2D")
+[node name="WaveManager" parent="." instance=ExtResource("2_yitaq")]
 waves = Array[ExtResource("3_3ioyq")]([ExtResource("4_w3rys"), ExtResource("4_gwu0x"), ExtResource("5_6a771"), ExtResource("6_rbsri"), ExtResource("7_k071l"), ExtResource("7_c8h5w"), ExtResource("8_nphuy"), ExtResource("9_844jo"), ExtResource("10_jqxm0"), ExtResource("11_6pbld")])
 
 [node name="TestMap1" type="TileMapLayer" parent="."]

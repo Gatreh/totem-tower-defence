@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://de8stvecwyiu5"]
+[gd_scene load_steps=14 format=3 uid="uid://de8stvecwyiu5"]
 
 [ext_resource type="Theme" uid="uid://cifa5fam0gar0" path="res://assets/in-game-ui_theme.tres" id="1_0unqf"]
 [ext_resource type="PackedScene" uid="uid://bdk24jj5rq45v" path="res://scenes/totem_button.tscn" id="1_4jlbm"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://b0f3qqyohmvxd" path="res://assets/heart.svg" id="3_wahjp"]
 [ext_resource type="Resource" uid="uid://dg2nk5b2cbf0h" path="res://data/resources/totem_eagle.tres" id="4_qlekd"]
 [ext_resource type="Resource" uid="uid://bcpvrftjs0q3r" path="res://data/resources/totem_salmon.tres" id="5_qw0qb"]
+[ext_resource type="Texture2D" uid="uid://c0p8hbxeid1gy" path="res://assets/cancel.svg" id="6_gepm8"]
 [ext_resource type="Resource" uid="uid://db61auoc7cjjy" path="res://data/resources/totem_wolf.tres" id="6_jhxg5"]
+[ext_resource type="Script" path="res://scenes/cancel_button.gd" id="7_uepcm"]
 
 [node name="InGameUI" type="Control"]
 layout_mode = 3
@@ -66,7 +68,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("1_0unqf")
-text = "00"
+text = " 00"
 fit_content = true
 shortcut_keys_enabled = false
 
@@ -81,7 +83,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("1_0unqf")
-text = "0000"
+text = " 4000"
 fit_content = true
 
 [node name="MarginContainer" type="MarginContainer" parent="TopUi"]
@@ -96,6 +98,21 @@ theme = ExtResource("1_0unqf")
 text = "Wave 00/00"
 fit_content = true
 scroll_active = false
+
+[node name="CancelButton" type="TextureButton" parent="TopUi"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+texture_normal = ExtResource("6_gepm8")
+texture_pressed = ExtResource("6_gepm8")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("7_uepcm")
+
+[node name="CancelMarginContainer" type="MarginContainer" parent="TopUi"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

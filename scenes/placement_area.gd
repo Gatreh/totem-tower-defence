@@ -1,6 +1,8 @@
 class_name PlacementArea extends Area2D
 
 const TOTEM_POLE = preload("res://scenes/totem_pole.tscn")
+@onready var in_game_ui: Control = %InGameUI
+
 
 func _ready() -> void:
 	input_event.connect(_on_input_event)
@@ -40,5 +42,5 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_index: int) 
 			new_totem_pole.global_position = event.global_position
 			new_totem_pole.add_totem_section(first_draggable.totem)
 			
-			# Clean up the draggable
+			# Clean up the draggable and cancel button
 			first_draggable.delete()

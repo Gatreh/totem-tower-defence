@@ -13,9 +13,11 @@ var element : Global.Element
 var gimmicks : Array[Global.Gimmick] = [Global.Gimmick.NONE]
 var max_totem_size : int = 2
 
+# Move selection to global to have a reference to the totem easily and 
+# swap out when selecting a different totem
+var selected : bool = false 
 var initial_outline_thickness : float = 3.0
 var hover_outline_thickness : float = initial_outline_thickness * 2
-
 
 var _sprite_displacement : int = -38
 var _targets : Array
@@ -136,8 +138,6 @@ func update_totem_pole():
 				# Add collision layer based on gimmick
 				attack_area.set_collision_mask_value(totem_stack[totem_index].gimmick, true)
 				gimmicks.append(totem_stack[totem_index].gimmick)
-				
-				# 
 			
 			2: # totem_index 2 upgrades the stats again, creates combination elements and adds a second gimmick
 				pass
@@ -196,11 +196,18 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
 		pass
 	
 	elif event_is_mouse_release and not has_mouse_draggable:
-		# Logic for changing outline colour and showing totem pole information tooltip,
-		pass
+		set_outline_color(Color.BLACK if selected else Color.WHITE)
+		selected = not selected
+		# Show tooltip window
+
 
 func set_outline_thickness(new_thickness: float) -> void:
 	$CanvasGroup.material.set_shader_parameter("line_thickness", new_thickness)
+
+
+func set_outline_color(new_color: Color) -> void:
+	$CanvasGroup.material.set_shader_parameter("line_color", new_color)
+
 
 func _on_mouse_entered() -> void:
 	var tween = create_tween()
@@ -208,5 +215,7 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	selected = false
+	set_outline_color(Color.BLACK)
 	var tween = create_tween()
 	tween.tween_method(set_outline_thickness, hover_outline_thickness, initial_outline_thickness, 0.08)
