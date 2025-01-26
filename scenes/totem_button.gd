@@ -15,19 +15,30 @@ func _ready() -> void:
 	gui_input.connect(_gui_input)
 
 
+func _create_mouse_draggable():
+	if not get_tree().get_nodes_in_group("mouse_draggable").size() > 0:
+		var mouse_draggable := TOTEM_DRAGGABLE.instantiate()
+		mouse_draggable.totem = totem.duplicate() as Totem 
+		mouse_draggable.original_owner = self
+		get_tree().get_first_node_in_group("ui_layer").add_child(mouse_draggable)
+		mouse_draggable.add_to_group("mouse_draggable")
+		
+		texture_rect.visible = false
+
 func _gui_input(event: InputEvent) -> void:
-	var is_mouse_pressed: bool = (
+	var is_left_mouse_pressed: bool = (
 		event is InputEventMouseButton and
 		event.button_index == MOUSE_BUTTON_LEFT and
 		event.is_pressed()
 	)
+	var has_mouse_draggable := get_tree().get_nodes_in_group("mouse_draggable").size() > 0
 	
-	if is_mouse_pressed:
-		if get_tree().get_nodes_in_group("mouse_draggable").size() == 0:
-			var mouse_draggable := TOTEM_DRAGGABLE.instantiate()
-			mouse_draggable.totem = totem.duplicate() as Totem 
-			mouse_draggable.original_owner = self
-			get_tree().get_first_node_in_group("ui_layer").add_child(mouse_draggable)
-			mouse_draggable.add_to_group("mouse_draggable")
-			
-			texture_rect.visible = false
+	if is_left_mouse_pressed and not has_mouse_draggable:
+		_create_mouse_draggable()
+	
+	elif is_left_mouse_pressed and has_mouse_draggable:
+		var first_draggable : TotemDraggable = get_tree().get_first_node_in_group("mouse_draggable")
+		if first_draggable.totem.name != totem.name:
+			first_draggable.delete()
+			await first_draggable.tree_exited
+			_create_mouse_draggable()

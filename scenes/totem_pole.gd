@@ -69,9 +69,11 @@ func shoot(targets : Array) -> void:
 	
 	if attack_type == Totem.AttackType.FLURRY:
 		bullet_amount = 3
+		var target_direction : Vector2 = global_position.direction_to(targets.front().global_position)
 		for n in bullet_amount:
-			bullet_scene = preload(projectile_path + "snipe_bullet.tscn").instantiate()
-			bullet_scene.global_position += Vector2(randi_range(-20, 20), randi_range(-20, 20))
+			bullet_scene = preload(projectile_path + "flurry_bullet.tscn").instantiate()
+			bullet_scene.velocity = Vector2(randi_range(-500, 500), randi_range(-500, 500))
+			bullet_scene.steering_factor = 2.0
 			bullets.append(bullet_scene)
 	
 	if attack_type == Totem.AttackType.QUAKE:
@@ -85,6 +87,7 @@ func shoot(targets : Array) -> void:
 	
 	if attack_type == Totem.AttackType.STRIKE:
 		bullet_scene = preload("res://scenes/projectiles/strike_bullet.tscn").instantiate()
+		bullet_scene.travel_speed = 10000.0
 		# Get target position
 		bullet_scene.global_position = targets.front().global_position - self.global_position + Vector2(0, -1080)
 		bullets.append(bullet_scene)
@@ -109,12 +112,14 @@ func update_totem_pole():
 	for totem_index in totem_stack.size():
 		match totem_index:
 			0: # totem_index 0 adds the basic stats and attack type
+				cost = totem_stack[totem_index].base_cost
 				damage = totem_stack[totem_index].base_damage
 				attack_speed = totem_stack[totem_index].base_attack_speed
 				attack_range = totem_stack[totem_index].base_range
 				attack_type = totem_stack[totem_index].attack_type
 			
 			1: # totem_index 1 upgrades the stats and adds the element and gimmick to the tower
+				cost *= totem_stack[totem_index].cost_multiplier
 				damage *= totem_stack[totem_index].damage_multiplier
 				attack_speed *= totem_stack[totem_index].attack_speed_multiplier
 				attack_range *= totem_stack[totem_index].range_multiplier
@@ -161,21 +166,28 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
 	
 	var has_mouse_draggable := get_tree().get_nodes_in_group("mouse_draggable").size() > 0
 	
-	if has_mouse_draggable and event_is_mouse_release and totem_stack.size() < max_totem_size:
+	if event_is_mouse_release and has_mouse_draggable and totem_stack.size() < max_totem_size:
 		var first_draggable : TotemDraggable = get_tree().get_first_node_in_group("mouse_draggable")
-		match totem_stack.size():
-			1:
-				if Global.shells < cost * first_draggable.totem.cost_multiplier:
-					return
-				else:
-					cost *= first_draggable.totem.cost_multiplier
-					Global.shells -= cost
+		var totem_cost = cost * first_draggable.totem.cost_multiplier if totem_stack.size() == 1 else 0
+		
+		if Global.shells < totem_cost:
+			# Show insufficient shells message
+			return
+		else:
+			cost *= first_draggable.totem.cost_multiplier
+			Global.shells -= cost
 		add_totem_section(first_draggable.totem)
 		
 		# Clean up draggable component
-		first_draggable.original_owner.texture_rect.visible = true
-		first_draggable.remove_from_group("mouse_draggable")
-		first_draggable.queue_free()
+		first_draggable.delete()
+	
+	elif event_is_mouse_release and has_mouse_draggable and totem_stack.size() == max_totem_size:
+		# show that max stack size has been reached
+		pass
+	
+	elif event_is_mouse_release and not has_mouse_draggable:
+		# Logic for changing outline colour and showing totem pole information tooltip,
+		pass
 
 func set_outline_thickness(new_thickness: float) -> void:
 	$CanvasGroup.material.set_shader_parameter("line_thickness", new_thickness)

@@ -105,6 +105,7 @@ anchor_bottom = 1.0
 offset_left = 1536.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(0.629427, 0.525614, 0.241124, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

@@ -5,6 +5,8 @@ var target : Enemy
 var element : Global.Element
 var modulation_color : Color
 var travel_speed : float = 3000.0
+var velocity : Vector2 = Vector2.ZERO
+var steering_factor := 15
 
 
 func _ready() -> void:
@@ -17,7 +19,10 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 		return
 	var direction = global_position.direction_to(target.global_position)
-	position += direction * travel_speed * delta
+	var desired_velocity : Vector2 = travel_speed * direction
+	var steering_vector := desired_velocity - velocity
+	velocity += steering_vector * steering_factor * delta
+	position += velocity * delta
 
 
 func _on_area_entered(area: Area2D) -> void:

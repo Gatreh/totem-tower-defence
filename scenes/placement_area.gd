@@ -41,7 +41,5 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_index: int) 
 			new_totem_pole.global_position = event.global_position
 			new_totem_pole.add_totem_section(first_draggable.totem)
 			
-			# Clean up the draggable and make the UI texture visible again
-			first_draggable.original_owner.texture_rect.visible = true
-			first_draggable.remove_from_group("mouse_draggable")
-			first_draggable.queue_free()
+			# Clean up the draggable
+			first_draggable.delete()

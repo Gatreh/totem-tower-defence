@@ -6,7 +6,6 @@ var original_owner : TotemButton
 func _ready() -> void:
 	texture = totem.base_texture
 	modulate = totem.modulation_color
-	print(totem.base_cost)
 
 
 func _process(_delta: float) -> void:
@@ -21,5 +20,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	)
 	
 	if is_right_mouse_button:
-		original_owner.texture_rect.visible = true
-		queue_free()
+		delete()
+
+func delete() -> void:
+	original_owner.texture_rect.visible = true
+	remove_from_group("totem_draggable")
+	queue_free()
