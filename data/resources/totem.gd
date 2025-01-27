@@ -33,6 +33,11 @@ class_name Totem extends Resource
 
 @export_category("Tier 3 Stats")
 
+var costs : Array[int] = [
+	base_cost,
+	base_cost * cost_multiplier,
+]
+
 ## This defines the different types of attacks that a [TotemPole] can use.
 enum AttackType {
 	## This attack gets an initial target and then jumps from enemy to enemy. Starts at 3 jumps.

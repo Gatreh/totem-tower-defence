@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=4 uid="uid://btu44hybbfikl"]
+[gd_scene load_steps=23 format=4 uid="uid://btu44hybbfikl"]
 
+[ext_resource type="PackedScene" uid="uid://bawvslj2ex7yp" path="res://globals/totem_manager.tscn" id="1_sjarc"]
 [ext_resource type="PackedScene" uid="uid://da3aws4vyqcbx" path="res://globals/wave_manager.tscn" id="2_yitaq"]
 [ext_resource type="Script" path="res://data/resources/waves/wave_data.gd" id="3_3ioyq"]
 [ext_resource type="Script" path="res://scenes/placement_area.gd" id="3_u7px2"]
@@ -44,6 +45,8 @@ point_count = 14
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
 
+[node name="TotemManager" parent="." instance=ExtResource("1_sjarc")]
+
 [node name="WaveManager" parent="." node_paths=PackedStringArray("path") instance=ExtResource("2_yitaq")]
 path = NodePath("../TestMap1/Path2D")
 waves = Array[ExtResource("3_3ioyq")]([ExtResource("4_w3rys"), ExtResource("4_gwu0x"), ExtResource("5_6a771"), ExtResource("6_rbsri"), ExtResource("7_k071l"), ExtResource("7_c8h5w"), ExtResource("8_nphuy"), ExtResource("9_844jo"), ExtResource("10_jqxm0"), ExtResource("11_6pbld")])
@@ -56,6 +59,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAIAAAAAAAA
 tile_set = SubResource("TileSet_adbvw")
 
 [node name="PlacementArea" type="Area2D" parent="TestMap1" groups=["placement_area"]]
+unique_name_in_owner = true
 scale = Vector2(1.05676, 1.07463)
 collision_layer = 32768
 collision_mask = 0

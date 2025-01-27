@@ -1,5 +1,7 @@
 class_name PlacementArea extends Area2D
 
+signal valid_position(position : Vector2, totem_data : Totem)
+
 const TOTEM_POLE = preload("res://scenes/totem_pole.tscn")
 
 
@@ -29,17 +31,7 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _shape_index: int) 
 		
 		if objects_clicked.size() == 1:
 			# If you clicked on only one area then create a new totem pole at that location
-			var first_draggable : TotemDraggable = get_tree().get_first_node_in_group("mouse_draggable")
+			valid_position.emit(event.global_position, 
+								get_tree().get_first_node_in_group("mouse_draggable").totem)
 			
-			# If you can't afford it then abort, else deduct cost.
-			if Global.shells < first_draggable.totem.base_cost:
-				return
-			Global.shells -= first_draggable.totem.base_cost
 			
-			var new_totem_pole := TOTEM_POLE.instantiate()
-			%TotemPoles.add_child(new_totem_pole)
-			new_totem_pole.global_position = event.global_position
-			new_totem_pole.add_totem_section(first_draggable.totem)
-			
-			# Clean up the draggable and cancel button
-			first_draggable.delete()

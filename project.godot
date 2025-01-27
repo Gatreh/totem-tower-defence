@@ -61,4 +61,5 @@ right_mouse={
 2d_physics/layer_4="SPEED"
 2d_physics/layer_5="STEALTH"
 2d_physics/layer_6="UNDERGROUND"
-2d_physics/layer_16="Placement"
+2d_physics/layer_15="TOTEM_PLACEMENT"
+2d_physics/layer_16="GROUND_PLACEMENT"

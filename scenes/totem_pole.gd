@@ -1,5 +1,7 @@
 class_name TotemPole extends Node2D
 
+signal stack_requested(totem_pole : TotemPole, totem_data: Totem)
+
 const projectile_path : String = "res://scenes/projectiles/"
 
 @export var totem_stack : Array[Totem]
@@ -22,10 +24,10 @@ var hover_outline_thickness : float = initial_outline_thickness * 2
 var _sprite_displacement : int = -38
 var _targets : Array
 
-@onready var stack_area: Area2D = $StackArea
 @onready var attack_area: Area2D = $AttackArea
 @onready var attack_range_area: CollisionShape2D = $AttackArea/Range
 @onready var attack_timer: Timer = $AttackTimer
+@onready var stack_area: Area2D = $StackArea
 @onready var stack_area_shape: CollisionShape2D = %StackAreaShape
 
 func _ready() -> void:
@@ -48,8 +50,8 @@ func _physics_process(_delta: float) -> void:
 func add_totem_section(section: Totem):
 	totem_stack.append(section)
 	update_totem_pole()
+	update_attack_area_collision()
 	generate_totem_sprite(section, totem_stack.size() - 1)
-	update_atack_area_collision()
 
 
 func generate_totem_sprite(totem : Totem, index: int) -> void:
@@ -59,12 +61,6 @@ func generate_totem_sprite(totem : Totem, index: int) -> void:
 	sprite.position.y = _sprite_displacement * index
 	sprite.scale *= 0.4
 	$CanvasGroup.add_child(sprite)
-
-
-func update_atack_area_collision():
-	stack_area_shape.position.y += floor(float(_sprite_displacement) / 2) 
-	stack_area_shape.shape.height -= _sprite_displacement
-	stack_area_shape.shape.radius = 40
 
 
 func shoot(targets : Array) -> void:
@@ -95,7 +91,7 @@ func shoot(targets : Array) -> void:
 		bullets.append(bullet_scene)
 	
 	if attack_type == Totem.AttackType.STRIKE:
-		bullet_scene = preload("res://scenes/projectiles/strike_bullet.tscn").instantiate()
+		bullet_scene = preload(projectile_path + "strike_bullet.tscn").instantiate()
 		bullet_scene.travel_speed = 10000.0
 		# Get target position
 		bullet_scene.global_position = targets.front().global_position - self.global_position + Vector2(0, -1080)
@@ -115,6 +111,12 @@ func shoot(targets : Array) -> void:
 		#get_tree().root.get_node("Level").add_child(bullet)
 		add_child(bullet)
 		await get_tree().create_timer((1 / attack_speed) / bullet_amount * 0.18).timeout
+
+
+func update_attack_area_collision():
+	stack_area_shape.position.y += floor(float(_sprite_displacement) / 2) 
+	stack_area_shape.shape.height -= _sprite_displacement
+	stack_area_shape.shape.radius = 40
 
 
 func update_totem_pole():
@@ -152,6 +154,14 @@ func set_attack_speed(new_attack_speed: float) -> void:
 	attack_timer.wait_time = 1 / attack_speed
 
 
+func set_outline_thickness(new_thickness: float) -> void:
+	$CanvasGroup.material.set_shader_parameter("line_thickness", new_thickness)
+
+
+func set_outline_color(new_color: Color) -> void:
+	$CanvasGroup.material.set_shader_parameter("line_color", new_color)
+
+
 func _on_attack_range_area_entered(area: Area2D) -> void:
 	if area is Enemy:
 		_targets.append(area)
@@ -176,36 +186,28 @@ func _on_input_event(_viewport: Viewport, event: InputEvent, _idx: int) -> void:
 	var has_mouse_draggable := get_tree().get_nodes_in_group("mouse_draggable").size() > 0
 	
 	if event_is_mouse_release and has_mouse_draggable and totem_stack.size() < max_totem_size:
-		var first_draggable : TotemDraggable = get_tree().get_first_node_in_group("mouse_draggable")
-		var totem_cost = cost * first_draggable.totem.cost_multiplier if totem_stack.size() == 1 else 0.0
-		
-		if Global.shells < totem_cost:
-			# Show insufficient shells message
-			return
-		else:
-			cost = floor(float(cost) * first_draggable.totem.cost_multiplier)
-			Global.shells -= cost
-		add_totem_section(first_draggable.totem)
-		
-		# Clean up draggable component
-		first_draggable.delete()
+		stack_requested.emit(self, get_tree().get_first_node_in_group("mouse_draggable").totem)
 	
 	elif event_is_mouse_release and has_mouse_draggable and totem_stack.size() == max_totem_size:
 		# show that max stack size has been reached
 		pass
 	
 	elif event_is_mouse_release and not has_mouse_draggable:
-		set_outline_color(Color.BLACK if selected else Color.WHITE)
-		selected = not selected
-		# Show tooltip window
-
-
-func set_outline_thickness(new_thickness: float) -> void:
-	$CanvasGroup.material.set_shader_parameter("line_thickness", new_thickness)
-
-
-func set_outline_color(new_color: Color) -> void:
-	$CanvasGroup.material.set_shader_parameter("line_color", new_color)
+		var parameters := PhysicsPointQueryParameters2D.new()
+		parameters.position = event.position
+		parameters.collide_with_areas = true
+		parameters.collision_mask = 1 << 14 # bitwise operator, move it by 15 positions, resulting in 16384.
+		
+		var objects_clicked = get_world_2d()\
+							.direct_space_state\
+							.intersect_point(parameters)\
+							.map(func(dict): return dict.collider)
+		objects_clicked.sort_custom(func(a, b): return a.global_position.y > b.global_position.y)
+		
+		if stack_area == objects_clicked[0]:
+			set_outline_color(Color.BLACK if selected else Color.WHITE)
+			selected = not selected
+			# Show tooltip window
 
 
 func _on_mouse_entered() -> void:
