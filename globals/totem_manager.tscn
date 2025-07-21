@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bawvslj2ex7yp"]
 
-[ext_resource type="Script" path="res://globals/totem_manager.gd" id="1_35tsn"]
+[ext_resource type="Script" uid="uid://t23c50u06luq" path="res://globals/totem_manager.gd" id="1_35tsn"]
 
 [node name="TotemManager" type="Node"]
 script = ExtResource("1_35tsn")

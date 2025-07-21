@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bawvslj2ex7yp" path="res://globals/totem_manager.tscn" id="1_sjarc"]
 [ext_resource type="PackedScene" uid="uid://da3aws4vyqcbx" path="res://globals/wave_manager.tscn" id="2_yitaq"]
-[ext_resource type="Script" path="res://data/resources/waves/wave_data.gd" id="3_3ioyq"]
-[ext_resource type="Script" path="res://scenes/placement_area.gd" id="3_u7px2"]
+[ext_resource type="Script" uid="uid://b3cwljgpbs4r6" path="res://data/resources/waves/wave_data.gd" id="3_3ioyq"]
+[ext_resource type="Script" uid="uid://bs6y2dduo0pv4" path="res://scenes/placement_area.gd" id="3_u7px2"]
 [ext_resource type="Resource" uid="uid://c85epeueyge0x" path="res://data/resources/waves/level_1_wave_2.tres" id="4_gwu0x"]
 [ext_resource type="Resource" uid="uid://dkchtfevt4s16" path="res://data/resources/waves/level_1_wave_1.tres" id="4_w3rys"]
 [ext_resource type="Resource" uid="uid://bq2q1obgmaphd" path="res://data/resources/waves/level_1_wave_3.tres" id="5_6a771"]
@@ -95,7 +95,14 @@ scale = Vector2(0.385, 0.385)
 [node name="Path2D" type="Path2D" parent="TestMap1"]
 curve = SubResource("Curve2D_es3f6")
 
+[node name="PathFollow2D" type="PathFollow2D" parent="TestMap1/Path2D"]
+position = Vector2(624, 560)
+rotation = 1.5708
+progress = 2792.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." groups=["ui_layer"]]
 
 [node name="InGameUI" parent="CanvasLayer" node_paths=PackedStringArray("wave_manager") instance=ExtResource("6_t23am")]
+offset_left = 16.0
+offset_right = 16.0
 wave_manager = NodePath("../../WaveManager")

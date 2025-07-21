@@ -1,12 +1,10 @@
 class_name TotemPole extends Node2D
 
 signal stack_requested(totem_pole : TotemPole, totem_data: Totem)
-
+ 
 const projectile_path : String = "res://scenes/projectiles/"
 
-@export var totem_stack : Array[Totem]
-
-var attack_speed: float : set = set_attack_speed
+var attack_speed : float : set = set_attack_speed
 var attack_range : int : set = set_attack_range
 var attack_type : Totem.AttackType
 var cost : int
@@ -14,6 +12,7 @@ var damage : int
 var element : Global.Element
 var gimmicks : Array[Global.Gimmick] = [Global.Gimmick.NONE]
 var max_totem_size : int = 2
+var totem_stack : Array[Totem]
 
 # Move selection to global to have a reference to the totem easily and 
 # swap out when selecting a different totem
@@ -47,7 +46,7 @@ func _physics_process(_delta: float) -> void:
 
 
 ## This function adds a totem section to the totem pole and updates the totem pole structure and stats.
-func add_totem_section(section: Totem):
+func add_totem_section(section: Totem) -> void:
 	totem_stack.append(section)
 	update_totem_pole()
 	update_attack_area_collision()
@@ -113,13 +112,13 @@ func shoot(targets : Array) -> void:
 		await get_tree().create_timer((1 / attack_speed) / bullet_amount * 0.18).timeout
 
 
-func update_attack_area_collision():
+func update_attack_area_collision() -> void:
 	stack_area_shape.position.y += floor(float(_sprite_displacement) / 2) 
 	stack_area_shape.shape.height -= _sprite_displacement
 	stack_area_shape.shape.radius = 40
 
 
-func update_totem_pole():
+func update_totem_pole() -> void:
 	for totem_index in totem_stack.size():
 		match totem_index:
 			0: # totem_index 0 adds the basic stats and attack type
@@ -132,7 +131,7 @@ func update_totem_pole():
 			1: # totem_index 1 upgrades the stats and adds the element and gimmick to the tower
 				cost = floor(float(cost) * totem_stack[totem_index].cost_multiplier)
 				damage = floor(float(damage) * totem_stack[totem_index].damage_multiplier)
-				attack_speed = floor(float(attack_speed) * totem_stack[totem_index].attack_speed_multiplier)
+				attack_speed = attack_speed * totem_stack[totem_index].attack_speed_multiplier
 				attack_range = floor(float(attack_range) * totem_stack[totem_index].range_multiplier)
 				element = totem_stack[totem_index].element as Global.Element
 				

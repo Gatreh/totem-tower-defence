@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfxkxcrftcd8d"]
 
-[ext_resource type="Script" path="res://scenes/totem_pole.gd" id="1_epydi"]
-[ext_resource type="Shader" path="res://assets/group_outline.gdshader" id="1_tci8f"]
+[ext_resource type="Script" uid="uid://f21rk26wpm3q" path="res://scenes/totem_pole.gd" id="1_epydi"]
+[ext_resource type="Shader" uid="uid://m1rg6jhmklbk" path="res://assets/group_outline.gdshader" id="1_tci8f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m58vh"]
 resource_local_to_scene = true

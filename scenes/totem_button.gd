@@ -18,7 +18,7 @@ func _ready() -> void:
 func _create_mouse_draggable():
 	var mouse_draggable := TOTEM_DRAGGABLE.instantiate()
 	mouse_draggable.totem = totem.duplicate() as Totem 
-	mouse_draggable.original_owner = self
+	mouse_draggable.draggable_deleted.connect(_on_draggable_deleted)
 	get_tree().get_first_node_in_group("ui_layer").add_child(mouse_draggable)
 	mouse_draggable.add_to_group("mouse_draggable")
 	
@@ -49,3 +49,7 @@ func _gui_input(event: InputEvent) -> void:
 	
 	elif is_right_mouse_released and has_mouse_draggable:
 		get_tree().get_first_node_in_group("mouse_draggable").delete()
+
+
+func _on_draggable_deleted() -> void:
+	texture_rect.visible = true

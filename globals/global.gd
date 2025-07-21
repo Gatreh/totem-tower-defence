@@ -24,7 +24,7 @@ enum Gimmick {
 }
 
 var player_health : int = 100 : set = set_player_health
-var shells : int = 400 : set = set_shells_amount
+var shells : int = 4000 : set = set_shells_amount
 
 
 func set_player_health(new_health : int) -> void:

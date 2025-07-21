@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyStats" load_steps=4 format=3 uid="uid://dkb12xwirxov7"]
 
-[ext_resource type="Script" path="res://data/resources/element_resistance.gd" id="1_1drbw"]
-[ext_resource type="Script" path="res://data/resources/enemies/enemy_stats.gd" id="2_cdpq1"]
+[ext_resource type="Script" uid="uid://ceck1iv4j5y6i" path="res://data/resources/element_resistance.gd" id="1_1drbw"]
+[ext_resource type="Script" uid="uid://clugd28ut501i" path="res://data/resources/enemies/enemy_stats.gd" id="2_cdpq1"]
 
 [sub_resource type="Resource" id="Resource_y4gro"]
 script = ExtResource("1_1drbw")

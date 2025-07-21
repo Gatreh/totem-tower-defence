@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdk24jj5rq45v"]
 
-[ext_resource type="Script" path="res://scenes/totem_button.gd" id="1_cmxp2"]
+[ext_resource type="Script" uid="uid://cusulovryoptr" path="res://scenes/totem_button.gd" id="1_cmxp2"]
 [ext_resource type="Texture2D" uid="uid://bhmrw2fs1mvak" path="res://assets/totem.svg" id="2_r1xdy"]
 
 [node name="TotemButton" type="Control"]

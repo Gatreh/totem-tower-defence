@@ -1,7 +1,8 @@
 class_name TotemDraggable extends Sprite2D
 
+signal draggable_deleted
+
 var totem : Totem
-var original_owner : TotemButton
 
 @onready var cancel_button = get_parent().get_node("InGameUI/%CancelButton") as UICancelButton
 
@@ -12,7 +13,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	global_position = get_global_mouse_position()
+	global_position = get_global_mouse_position() + (texture.get_size() * (scale / 2))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -25,8 +26,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_right_mouse_button:
 		delete()
 
+
 func delete() -> void:
 	cancel_button.toggle_visibilty(false) 
-	original_owner.texture_rect.visible = true
+	draggable_deleted.emit()
 	remove_from_group("totem_draggable")
 	queue_free()

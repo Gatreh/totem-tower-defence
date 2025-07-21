@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://28xdkbim5umh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vbo0"]
+bg_color = Color(0.176581, 0.158904, 0.141228, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.906407, 0.667108, 0.399095, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 9.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 7.0
+shadow_size = 1
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_barjo"]
+bg_color = Color(0.5098, 0.341606, 0.138777, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[node name="TotemTooltip" type="Panel"]
+offset_right = 189.0
+offset_bottom = 211.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8vbo0")
+
+[node name="StatTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 135.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+text = "Damage: 
+Attack Speed: 
+Range:
+Attack Type:
+Element: "
+fit_content = true
+
+[node name="StatNumberLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_bottom = 135.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+text = "[center]30
+5/s
+3000
+Quake
+Thunder
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="Separator" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 140.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_barjo")
+
+[node name="TotemDescription" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -69.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "This tower can hit [color=BBB]NORMAL[/color],  [color=ADFF2F]FLYING[/color] and [color=FFD700]STEALTH[/color] enemies."
+fit_content = true
+scroll_active = false

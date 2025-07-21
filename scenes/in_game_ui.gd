@@ -57,7 +57,7 @@ func _on_button_gui_input(event: InputEvent):
 	)
 	var has_mouse_draggable : bool = get_tree().get_nodes_in_group("mouse_draggable").size() > 0
 	if is_right_mouse_button and has_mouse_draggable:
-		get_tree().get_first_node_in_group("mouse_draggable").delete()
+		cancel_placement()
 
 
 func _on_cancel_gui_input(event: InputEvent):

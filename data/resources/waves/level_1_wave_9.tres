@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="WaveData" load_steps=7 format=3 uid="uid://cjtn5ufnw758n"]
 
-[ext_resource type="Script" path="res://globals/enemy_spawn_data.gd" id="1_nijug"]
+[ext_resource type="Script" uid="uid://47h1a3hks746" path="res://globals/enemy_spawn_data.gd" id="1_nijug"]
 [ext_resource type="PackedScene" uid="uid://qp21b532vox5" path="res://scenes/enemies/enemy7_flying.tscn" id="2_paxa4"]
 [ext_resource type="PackedScene" uid="uid://ciojx4hw5gmh1" path="res://scenes/enemies/enemy5.tscn" id="3_vuuom"]
-[ext_resource type="Script" path="res://data/resources/waves/wave_data.gd" id="3_y2lg4"]
+[ext_resource type="Script" uid="uid://b3cwljgpbs4r6" path="res://data/resources/waves/wave_data.gd" id="3_y2lg4"]
 
 [sub_resource type="Resource" id="Resource_o1581"]
 script = ExtResource("1_nijug")

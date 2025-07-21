@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="WaveData" load_steps=13 format=3 uid="uid://d2ruulkv3jdca"]
 
-[ext_resource type="Script" path="res://globals/enemy_spawn_data.gd" id="1_108p5"]
+[ext_resource type="Script" uid="uid://47h1a3hks746" path="res://globals/enemy_spawn_data.gd" id="1_108p5"]
 [ext_resource type="PackedScene" uid="uid://7f6vqfl4ioyb" path="res://scenes/enemies/enemy1.tscn" id="2_1ws1i"]
-[ext_resource type="Script" path="res://data/resources/waves/wave_data.gd" id="3_5y0em"]
+[ext_resource type="Script" uid="uid://b3cwljgpbs4r6" path="res://data/resources/waves/wave_data.gd" id="3_5y0em"]
 [ext_resource type="PackedScene" uid="uid://3ka7yqnv4n5k" path="res://scenes/enemies/enemy2.tscn" id="3_72rlp"]
 [ext_resource type="PackedScene" uid="uid://b10dvcci2dyph" path="res://scenes/enemies/enemy3.tscn" id="4_c8m4j"]
 [ext_resource type="PackedScene" uid="uid://xs4vk6bqk3yk" path="res://scenes/enemies/enemy4.tscn" id="5_b143u"]

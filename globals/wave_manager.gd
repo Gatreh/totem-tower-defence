@@ -34,7 +34,7 @@ func spawn_wave() -> void:
 
 func spawn_enemy(enemy_scene: PackedScene) -> void:
 	if not path:
-		push_error("PathFollow2D is not assigned in WaveManager")
+		push_error("Path is not assigned in WaveManager")
 		return
 	if not enemy_scene:
 		push_error("Enemy scene is not assigned in WaveData")
